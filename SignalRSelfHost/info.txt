@@ -1,0 +1,30 @@
+﻿Drawing libraries
+
+http://ocanvas.org/
+Work with objects instead of pixels. 
+
+http://bonsaijs.org/
+
+
+Map library
+http://leafletjs.com/ (free)
+http://www.openstreetmap.de/karte.html?zoom=16&lat=50.02366&lon=11.97052&layers=B000TF (Schönbrunn)
+http://www.amcharts.com/demos/grouped-countries-map/#theme-none (Amcharts)
+
+Charting libraries
+http://bl.ocks.org/mbostock/3885304 (d3)
+http://bl.ocks.org/anupsavvy/9513382 (d3)
+http://www.amcharts.com/demos/grouped-countries-map/#theme-none (Amcharts)
+
+http://www.d3noob.org/2013/01/using-multiple-axes-for-d3js-graph.html (multiple axis for 2 series with different magnitude)
+d3s Bar Chart
+
+http://www.chartjs.org/docs/
+
+
+Loader image
+http://bl.ocks.org/mbostock/3750941
+
+
+Image map creator
+http://www.maschek.hu/imagemap/imgmap
