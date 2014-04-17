@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RazorEngine;
+using RazorEngine.Templating;
 
 namespace SignalRSelfHost
 {
@@ -54,7 +56,7 @@ namespace SignalRSelfHost
             );
 
             // Razor - so WebApi can use views+razor
-            config.Formatters.Add(new RazorViewFormatter(null, new RazorViewLocator(), new RazorViewParser()));
+            config.Formatters.Add(new RazorViewFormatter(null, new RazorViewLocator(), new RazorViewParser(baseTemplateType: typeof(HtmlTemplateBase<>))));
 
             appBuilder.UseWebApi(config);
         } 

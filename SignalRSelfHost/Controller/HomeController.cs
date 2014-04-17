@@ -6,10 +6,9 @@ namespace SignalRSelfHost
     public class HomeController : ApiController //PageResourcesController
     {
         //http://localhost:8080/api/home
-        public HomeValue GetValues()
+        public HtmlActionResult GetValues()
         {
-            // Option via return type: return new View("Home", null);
-            return new HomeValue() { Numbers = new int[] { 1, 2, 3 } };
+            return new HtmlActionResult("Home.cshtml", new { Numbers = new [] { 1, 2, 3 } });
         }
 
         //want to return just XML and not go via the view+razor+cshtml
