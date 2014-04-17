@@ -1,7 +1,31 @@
 ﻿    <!-- Knockout view template for energy live view -->
-<script id="ViewEnergyLive" type="text/html">
-    First:
-    <input data-bind="value: firstName" />
-    Last:
-    <input data-bind="value: lastName" />
+<script id="energylive" type="text/html">
+    <h1>Register <small>Enter name and email</small></h1>
+    <form role="form">
+        <div class="form-group">
+            <label for="exampleInputFirstName">Firstname</label>
+            <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Enter firstname" data-bind="value: firstname">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputLastName">Lastname</label>
+            <input type="text" class="form-control" id="exampleInputLastName" placeholder="Enter lastname" data-bind="value: lastname">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" data-bind="value: email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" data-bind="value: password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" id="exampleInputFile">
+            <p class="help-block">Example block-level help text here.</p>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"> Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 </script>

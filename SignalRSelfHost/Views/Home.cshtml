@@ -19,6 +19,8 @@
 
     <!--Script references. -->
     <script type="text/javascript">
+        
+        // configure requirejs before referencing script to enforce this configuration.
         var require = {
             //waitsSeconds: 3,
 
@@ -64,19 +66,21 @@
                 <!-- links for each main page from viewmodel-->
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav" data-bind="foreach:views">
-                        <!-- iterate over app's views and create links with view's title attribute-->
-                        <li data-bind="css: { active: $root.currentView() == $data.title }">
-                            <a data-bind="text: $data.title, attr:{ href:'#' + $data.title }"></a>
+                        <!-- iterate over app's viewmodel array and create #-links with view's title attribute-->
+                        <li data-bind="css: { active: $root.currentView() == $data.title() }">
+                            <a data-bind="text: $data.title(), attr:{ href:'#' + $data.title() }"></a>
                         </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </div>
-
+        
+        <!-- page content from selected view -->
         <div class="container">
             <div class="row">
-                <div class="span12" data-bind="with:currentView">
-                    <div data-bind="template: { name: templateName, data: model}"></div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6" data-bind="with:currentView">
+                    <div data-bind="template: { name: title(), data: model()}"></div>
                 </div>
             </div>
 
@@ -84,19 +88,7 @@
                 <h1>Monitoring</h1>
                 <p class="lead">Gesamtstatus.<br> Details...</p>
                 
-                <div id="tpl">should be hidden...</div>
-
-                <h2>--- Razor Test ---</h2>
-                <ul>
-                    @*@foreach (var value in Model.Numbers)
-                        {
-                            <li>@value</li>
-                        }*@
-                </ul>
-
-                <br />
-
-
+                <h3>SignalR Test</h3>
                 <input type="text" id="message" />
                 <input type="button" id="sendmessage" value="Send" />
                 <input type="hidden" id="displayname" />
@@ -104,68 +96,31 @@
             </div>
 
         </div><!-- /.container -->
-    </div>   
+    </div>   <!-- /.app -->
+    
+    <!-- container for html view templates -->
+    <div id="tpl"></div>
 
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
-        require(['jquery', 'knockout', 'sammy', 'signalr.hubs', 'viewmodel/app', 'text!../../Views/home.html', 'text!../../Views/energylive.html'],
-            function (jquery, ko, sammy, signalr, appViewModel, viewhome, viewenergylive) {
+        require(['jquery', 'knockout', 'sammy', 'viewmodel/app'],
+        function (jquery, ko, sammy, appViewModel) {
 
-                // add template to dom
-                jquery('#tpl').append(viewhome);
-                jquery('#tpl').append(viewenergylive);
+            // add templates to dom
+            //jquery('#tpl').append(homeTemplate);
+            //jquery('#tpl').append(energyLiveTemplate);
 
-                // initialize view model
-                var appModel = new appViewModel();
-                ko.applyBindings(appModel, document.getElementById("app"));
+            // initialize view model
+            var appModel = new appViewModel();
+            ko.applyBindings(appModel, document.getElementById("app"));
 
-                // set up Sammy
-                sammy(function () {
-                    this.get('#:view', function () {
-                        appModel.navigateToView(this.params.view);
-                    });
-                }).run('#Home');
-
-                // set up SignalR
-                setupSignalr(jquery);
-            });
-
-        var setupSignalr = function (jquery) {
-            // set signalr base url
-            jquery.connection.hub.url = "http://localhost:9000/signalr";
-
-            // Declare a proxy to reference the hub.
-            var chat = jquery.connection.mainHub;
-
-            // Create a function that the hub can call to broadcast messages.
-            chat.client.sendMessage = function (name, message) {
-                // Html encode display name and message.
-                var encodedName = $('<div />').text(name).html();
-                var encodedMsg = $('<div />').text(message).html();
-                // Add the message to the page.
-                jquery('#discussion').append('<li><strong>' + encodedName
-                    + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
-            };
-
-            // Get the user name and store it to prepend to messages.
-            //$('#displayname').val(prompt('Enter your name:', ''));
-            jquery('#displayname').val("msk");
-
-
-            // Set initial focus to message input box.
-            jquery('#message').focus();
-
-            // Start the connection.
-            jquery.connection.hub.start().done(function () {
-                jquery('#sendmessage').click(function () {
-                    // Call the Send method on the hub.
-                    chat.server.send($('#displayname').val(), jquery('#message').val());
-
-                    // Clear text box and reset focus for next comment.
-                    jquery('#message').val('').focus();
+            // set up Sammy
+            sammy(function () {
+                this.get('#:view', function () {
+                    appModel.navigateToView(this.params.view);
                 });
-            });
-        };
+            }).run('#energylive');
+        });
     </script>
 </body>
 </html> 
