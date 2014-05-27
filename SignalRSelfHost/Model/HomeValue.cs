@@ -1,7 +1,7 @@
-﻿namespace SignalRSelfHost
-{
-    using WebApiContrib.Formatting.Html;
+﻿using WebApiContrib.Formatting.Html;
 
+namespace SignalRSelfHost.Model
+{
     [View("Home")]     //need this line to get the webApi views+razor to work
     public class HomeValue
     {

@@ -11,6 +11,21 @@
     <AssemblyName>SignalRSelfHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +36,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +49,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.5.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.0.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -61,8 +87,12 @@
     <Reference Include="Microsoft.Owin.StaticFiles">
       <HintPath>..\packages\Microsoft.Owin.StaticFiles.2.1.0\lib\net45\Microsoft.Owin.StaticFiles.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -71,6 +101,7 @@
       <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
@@ -78,6 +109,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -109,6 +141,81 @@
     <Compile Include="Controller\HomeController.cs" />
     <Compile Include="Controller\HtmlActionResult.cs" />
     <Compile Include="Hubs\MainHub.cs" />
+    <Compile Include="Infrastructure\AlertType.cs" />
+    <Compile Include="Infrastructure\Config\AppSettings.cs" />
+    <Compile Include="Infrastructure\Config\JsonConfig.cs" />
+    <Compile Include="Infrastructure\Csv\CsvFileComparer.cs" />
+    <Compile Include="Infrastructure\Csv\CsvFileProcessor.cs" />
+    <Compile Include="Infrastructure\DiffMatchPatch.cs" />
+    <Compile Include="Infrastructure\EventType.cs" />
+    <Compile Include="Infrastructure\FileStatus.cs" />
+    <Compile Include="Infrastructure\FileType.cs" />
+    <Compile Include="Migrations\201404240821023_InitialCreate.cs" />
+    <Compile Include="Migrations\201404240821023_InitialCreate.Designer.cs">
+      <DependentUpon>201404240821023_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404240854143_AddTest.cs" />
+    <Compile Include="Migrations\201404240854143_AddTest.Designer.cs">
+      <DependentUpon>201404240854143_AddTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404241221187_ExtendFilesystemItem.cs" />
+    <Compile Include="Migrations\201404241221187_ExtendFilesystemItem.Designer.cs">
+      <DependentUpon>201404241221187_ExtendFilesystemItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404241224114_RemoveTest.cs" />
+    <Compile Include="Migrations\201404241224114_RemoveTest.Designer.cs">
+      <DependentUpon>201404241224114_RemoveTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404251121568_AddParentItem.cs" />
+    <Compile Include="Migrations\201404251121568_AddParentItem.Designer.cs">
+      <DependentUpon>201404251121568_AddParentItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404301056418_AddDataDeliverItem.cs" />
+    <Compile Include="Migrations\201404301056418_AddDataDeliverItem.Designer.cs">
+      <DependentUpon>201404301056418_AddDataDeliverItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404301300458_ChangeDataDeliveryItem.cs" />
+    <Compile Include="Migrations\201404301300458_ChangeDataDeliveryItem.Designer.cs">
+      <DependentUpon>201404301300458_ChangeDataDeliveryItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404301316274_AddCreatedAtToDataDelivery.cs" />
+    <Compile Include="Migrations\201404301316274_AddCreatedAtToDataDelivery.Designer.cs">
+      <DependentUpon>201404301316274_AddCreatedAtToDataDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404301454462_virtual_navigation_items.cs" />
+    <Compile Include="Migrations\201404301454462_virtual_navigation_items.Designer.cs">
+      <DependentUpon>201404301454462_virtual_navigation_items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404301459292_changed_datadeliveryitem.cs" />
+    <Compile Include="Migrations\201404301459292_changed_datadeliveryitem.Designer.cs">
+      <DependentUpon>201404301459292_changed_datadeliveryitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404301528275_removedParentItem.cs" />
+    <Compile Include="Migrations\201404301528275_removedParentItem.Designer.cs">
+      <DependentUpon>201404301528275_removedParentItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405051433294_AddFilesystemAlert.cs" />
+    <Compile Include="Migrations\201405051433294_AddFilesystemAlert.Designer.cs">
+      <DependentUpon>201405051433294_AddFilesystemAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405061436433_addDiffHtml.cs" />
+    <Compile Include="Migrations\201405061436433_addDiffHtml.Designer.cs">
+      <DependentUpon>201405061436433_addDiffHtml.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405070637232_addStatisticalDataToFileItem.cs" />
+    <Compile Include="Migrations\201405070637232_addStatisticalDataToFileItem.Designer.cs">
+      <DependentUpon>201405070637232_addStatisticalDataToFileItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\File\DataDeliveryItem.cs" />
+    <Compile Include="Model\File\FileContext.cs" />
+    <Compile Include="Model\File\FilesystemAlert.cs" />
+    <Compile Include="Model\File\FilesystemItem.cs" />
+    <Compile Include="Infrastructure\UploadObserver.cs" />
+    <Compile Include="Infrastructure\NetworkConnection.cs" />
+    <Compile Include="Infrastructure\StringCipher.cs" />
+    <Compile Include="Model\DomainId.cs" />
+    <Compile Include="Model\UniversityId.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -140,22 +247,73 @@
     <None Include="Content\fonts\glyphicons-halflings-regular.woff">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\css\toastr.less">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\toastr.min.js.map" />
+    <None Include="settings.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Views\Home.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201404240821023_InitialCreate.resx">
+      <DependentUpon>201404240821023_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404240854143_AddTest.resx">
+      <DependentUpon>201404240854143_AddTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404241221187_ExtendFilesystemItem.resx">
+      <DependentUpon>201404241221187_ExtendFilesystemItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404241224114_RemoveTest.resx">
+      <DependentUpon>201404241224114_RemoveTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404251121568_AddParentItem.resx">
+      <DependentUpon>201404251121568_AddParentItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301056418_AddDataDeliverItem.resx">
+      <DependentUpon>201404301056418_AddDataDeliverItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301300458_ChangeDataDeliveryItem.resx">
+      <DependentUpon>201404301300458_ChangeDataDeliveryItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301316274_AddCreatedAtToDataDelivery.resx">
+      <DependentUpon>201404301316274_AddCreatedAtToDataDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301454462_virtual_navigation_items.resx">
+      <DependentUpon>201404301454462_virtual_navigation_items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301459292_changed_datadeliveryitem.resx">
+      <DependentUpon>201404301459292_changed_datadeliveryitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301528275_removedParentItem.resx">
+      <DependentUpon>201404301528275_removedParentItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405051433294_AddFilesystemAlert.resx">
+      <DependentUpon>201405051433294_AddFilesystemAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405061436433_addDiffHtml.resx">
+      <DependentUpon>201405061436433_addDiffHtml.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405070637232_addStatisticalDataToFileItem.resx">
+      <DependentUpon>201405070637232_addStatisticalDataToFileItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-theme.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -211,13 +369,49 @@
     <Content Include="Content\js\viewmodel\app.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\css\toastr.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\css\toastr.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="info.txt" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\d3.js" />
+    <Content Include="Scripts\d3.min.js" />
+    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Content\js\lib\jquery.cookie.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Content\js\lib\toastr.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\home.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\energylive.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

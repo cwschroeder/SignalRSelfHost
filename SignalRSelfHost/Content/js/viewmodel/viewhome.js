@@ -1,11 +1,9 @@
-﻿define(['jquery', 'knockout', 'signalr.hubs', 'text!../../../Views/home.html'],
-    function (jquery, ko, signalr, templateHome) {
+﻿define(['jquery', 'knockout', 'signalr.hubs'],
+    function (jquery, ko, signalr) {
 
         // Viewmodel for home view
         return function () {
             var self = this;
-
-            self.template = ko.observable(templateHome);
 
             self.items = ko.observableArray([
                 { id: 1, name: "one" },

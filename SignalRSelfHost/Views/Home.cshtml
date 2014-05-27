@@ -1,7 +1,4 @@
-﻿@using Microsoft.Owin.StaticFiles.DirectoryFormatters
-@using RazorEngine
-@using SignalRSelfHost
-<html>
+﻿<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +16,7 @@
 
     <!--Script references. -->
     <script type="text/javascript">
-        
+
         // configure requirejs before referencing script to enforce this configuration.
         var require = {
             //waitsSeconds: 3,
@@ -61,7 +58,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Projekt</a>
+                    <a class="navbar-brand" href="#home">Projekt</a>
                 </div>
                 <!-- links for each main page from viewmodel-->
                 <div class="collapse navbar-collapse">
@@ -74,41 +71,35 @@
                 </div><!--/.nav-collapse -->
             </div>
         </div>
-        
+
         <!-- page content from selected view -->
         <div class="container">
+            
             <div class="row">
-                <div class="col-md-6"></div>
                 <div class="col-md-6" data-bind="with:currentView">
                     <div data-bind="template: { name: title(), data: model()}"></div>
                 </div>
-            </div>
-
-            <div class="starter-template">
-                <h1>Monitoring</h1>
-                <p class="lead">Gesamtstatus.<br> Details...</p>
                 
-                <h3>SignalR Test</h3>
-                <input type="text" id="message" />
-                <input type="button" id="sendmessage" value="Send" />
-                <input type="hidden" id="displayname" />
-                <ul id="discussion"></ul>
-            </div>
+                <div class="col-md-6">
+                    <h1>Monitoring</h1>
+                    <p class="lead">Gesamtstatus.<br> Details...</p>
 
+                    <h3>SignalR Test</h3>
+                    <input type="text" id="message" />
+                    <input type="button" id="sendmessage" value="Send" />
+                    <input type="hidden" id="displayname" />
+                    <ul id="discussion"></ul>
+                </div>
+            </div>
         </div><!-- /.container -->
     </div>   <!-- /.app -->
-    
     <!-- container for html view templates -->
     <div id="tpl"></div>
 
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
-        require(['jquery', 'knockout', 'sammy', 'viewmodel/app'],
-        function (jquery, ko, sammy, appViewModel) {
-
-            // add templates to dom
-            //jquery('#tpl').append(homeTemplate);
-            //jquery('#tpl').append(energyLiveTemplate);
+        require(['knockout', 'sammy', 'viewmodel/app'],
+        function (ko, sammy, appViewModel) {
 
             // initialize view model
             var appModel = new appViewModel();
@@ -119,7 +110,7 @@
                 this.get('#:view', function () {
                     appModel.navigateToView(this.params.view);
                 });
-            }).run('#energylive');
+            }).run('#home');
         });
     </script>
 </body>

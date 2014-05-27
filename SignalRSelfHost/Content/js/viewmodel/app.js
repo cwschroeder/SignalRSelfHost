@@ -48,8 +48,5 @@
                     console.log("Unknown view: " + viewTitle);
                 }
             };
-
-            // init with home view
-            //self.navigateToView(self.views()[0]);
         }
     })

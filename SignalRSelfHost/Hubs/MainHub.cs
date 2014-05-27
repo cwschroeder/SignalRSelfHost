@@ -8,7 +8,7 @@ namespace SignalRSelfHost.Hubs
     {
         public void Send(string name, string message)
         {
-            //Console.WriteLine("Context: {0}", Context.User.Identity.Name);
+            //Console.WriteLine("Context: {0}", Context.User.Identity.FullPath);
             Clients.All.sendMessage(name, message);
         }
     }

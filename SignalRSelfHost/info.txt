@@ -12,14 +12,15 @@ http://www.openstreetmap.de/karte.html?zoom=16&lat=50.02366&lon=11.97052&layers=
 http://www.amcharts.com/demos/grouped-countries-map/#theme-none (Amcharts)
 
 Charting libraries
-http://bl.ocks.org/mbostock/3885304 (d3)
-http://bl.ocks.org/anupsavvy/9513382 (d3)
-http://www.amcharts.com/demos/grouped-countries-map/#theme-none (Amcharts)
+http://bl.ocks.org/mbostock/3885304 (d3 stacked bar)
+http://bl.ocks.org/anupsavvy/9513382 (d3 stacked bar on time scale)
+http://www.amcharts.com/demos/grouped-countries-map/#theme-none (Amcharts Maps)
+http://humblesoftware.com/flotr2/index#!basic-bars (Flotr2 sehr gut für live charts)
 
 http://www.d3noob.org/2013/01/using-multiple-axes-for-d3js-graph.html (multiple axis for 2 series with different magnitude)
 d3s Bar Chart
 
-http://www.chartjs.org/docs/
+http://www.chartjs.org/docs/ (Einfach, schön, gute Doku)
 
 
 Loader image
